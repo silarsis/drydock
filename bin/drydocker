@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'drydocker'
+require 'optparse'
+
+# Command line parser to setup options
+# :name, :command, :image, :entrypoint, :path
+class DrydockerOptions
+  def self.parse(args)
+    options = Drydocker::Config.default_config
+
+    opt_parser = OptionParser.new do |opts|
+      opts.banner = 'Usage: drydocker [options]'
+      opts.separator ''
+      opts.separator 'Specific options:'
+
+      opts.on('-f', '--filename [FILENAME]', 'File of options to load') do |fn|
+        options.load(fn)
+      end
+
+      opts.on('-n', '--name [NAME]') do |name|
+        options[:name] = name
+      end
+
+      opts.on('-c', '--command [COMMAND]') do |cmd|
+        options[:command] = cmd
+      end
+
+      opts.on('-i', '--image [IMAGE]') do |img|
+        options[:image] = img
+      end
+
+      opts.on('-e', '--entrypoint [ENTRYPOINT]') do |entry|
+        options[:entrypoint] = entry
+      end
+
+      opts.on('-p', '--path [PATH]') do |path|
+        options[:path] = path
+      end
+    end
+    opt_parser.parse!(args)
+    options
+  end
+end
+
+options = DrydockerOptions.parse(ARGV)
+config = Drydocker::Config.new(options)
+monitor = Drydocker::Monitor.new(config)
+monitor.clean_containers
+monitor.listen
+sleep
