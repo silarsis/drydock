@@ -1,5 +1,7 @@
 # drydocker
 
+[![wercker status](https://app.wercker.com/status/b00d4339862ef12b880f0022b6d20b2a/s "wercker status")](https://app.wercker.com/project/bykey/b00d4339862ef12b880f0022b6d20b2a)
+
 A project to provide a simple continuous testing tool.
 
 ## Installation
