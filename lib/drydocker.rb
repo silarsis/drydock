@@ -29,7 +29,7 @@ module Drydocker
     private
 
     def name_from_image
-      "#{image.sub('/', '-').sub(':', '-')}-test"
+      "#{image.gsub(/[\/:]/, '-')}-test"
     end
   end
 

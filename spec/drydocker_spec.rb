@@ -24,6 +24,10 @@ module Drydocker
         let(:config) { Config.new(image: 'args-test') }
         specify { expect(config.image).to eq 'args-test' }
       end
+      context 'image (longform)' do
+        let(:config) { Config.new(image: 'reg.me.com/ns/container:tag') }
+        specify { expect(config.image).to eq 'reg.me.com/ns/container:tag' }
+      end
       context 'entrypoint' do
         let(:config) { Config.new(entrypoint: 'args-test') }
         specify { expect(config.entrypoint).to eq 'args-test' }
