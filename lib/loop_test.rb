@@ -1,26 +1,29 @@
 require 'listen'
-require 'yaml'
+require 'ptools'
 
 module LoopTest
   # Configuration file reader
   class Config
     attr_reader :name, :command, :image, :entrypoint, :path
 
-    def default_config
+    def self.default_config
       {
-        'name' => 'test-container',
-        'command' => 'rspec spec',
-        'path' => `pwd`.strip,
+        name: nil,
+        image: 'loop_test',
+        command: 'rspec spec',
+        entrypoint: nil,
+        path: `pwd`.strip
       }
     end
 
-    def initialize(filename)
-      config = default_config.merge(YAML.load(open(filename)))
-      @name = config['name']
-      @entrypoint = config['entrypoint']
-      @image = config['image']
-      @command = config['command']
-      @path = config['path']
+    def initialize(params = {})
+      config = Config.default_config.merge(params)
+      @name = config[:name] || "#{config[:image]}-test"
+      @entrypoint = config[:entrypoint]
+      @image = config[:image]
+      @command = config[:command]
+      @path = config[:path]
+      @testing = config[:testing]
     end
   end
 
@@ -33,16 +36,27 @@ module LoopTest
     end
 
     def listen
-      listener = Listen.to(config.path) do
+      listener = Listen.to(config.path) do |modified, added, removed|
+        puts "triggering change: #{modified + added + removed}"
         run_or_start
       end
       listener.start # not blocking
     end
 
+    def clean_containers
+      fail 'No docker found' if File.which('docker').nil?
+      return unless system("docker ps | grep #{config.name}")
+      `docker kill #{config.name}`
+      `docker rm #{config.name}`
+    end
+
     private
 
     def docker_run_cmd
-      %W(#{docker_cmd} #{name_opt} #{path_opt} #{entrypoint_opt} #{config.image} #{command}).reject { |x| x == '' }.join(' ')
+      %W(
+        #{docker_cmd} #{name_opt} #{path_opt} #{entrypoint_opt} #{config.image}
+        #{command}
+      ).reject { |x| x == '' }.join(' ')
     end
 
     def docker_start_cmd
@@ -62,7 +76,7 @@ module LoopTest
     end
 
     def entrypoint_opt
-      config.entrypoint.nil? ? nil : "--entrypoint #{config.entrypoint}"
+      config.entrypoint.nil? ? '' : "--entrypoint #{config.entrypoint}"
     end
 
     def path_opt
