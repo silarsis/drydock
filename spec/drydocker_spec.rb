@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'drydocker'
 
 # Tests for the main module
-module Drydock
+module Drydocker
   describe Config do
     context 'with basic configuration' do
       let(:config) { Config.new }
@@ -36,7 +36,7 @@ module Drydock
   end
 
   describe Monitor do
-    let(:config) { Drydock::Config.new }
+    let(:config) { Config.new }
     let(:monitor) { Monitor.new(config) }
 
     describe '#monitor' do

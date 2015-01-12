@@ -1,7 +1,7 @@
 require 'listen'
 require 'ptools'
 
-module Drydock
+module Drydocker
   # Configuration file reader
   class Config
     attr_reader :name, :command, :image, :entrypoint, :path
