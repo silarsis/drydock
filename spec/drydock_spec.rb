@@ -8,7 +8,7 @@ module Drydock
       let(:config) { Config.new }
       specify { expect(config.name).to eq 'drydock-test' }
       specify { expect(config.entrypoint).to be_nil }
-      specify { expect(config.image).to eq 'drydock' }
+      specify { expect(config.image).to eq 'silarsis/drydock' }
       specify { expect(config.command).to eq 'rspec spec' }
     end
     context 'with provide value for' do
