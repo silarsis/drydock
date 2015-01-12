@@ -6,8 +6,8 @@ A project to provide a simple continuous testing tool.
 
 ## Installation
 
-Drydocker can be installed as a gem (`gem install drydocker`), or as a docker
-image (`docker pull silarsis/drydocker`)
+Drydocker can be installed as a gem - `gem install drydocker` (or, on OS X,
+`sudo gem install drydocker`)
 
 ## Usage
 
@@ -20,7 +20,8 @@ that has enough for running rspec installed, and will run `rspec spec` every
 time it sees a change in the directory.
 
 You can specify particular images to run in and commands to run at command line
-if you need to run your tests in a different way or container.
+if you need to run your tests in a different way or container. Please refer to
+the output of `drydocker -h` for more information on the flags to use.
 
 ## Contributing to drydocker
 
@@ -30,7 +31,7 @@ if you need to run your tests in a different way or container.
 * Start a feature/bugfix branch.
 * Commit and push until you are happy with your contribution.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+* Create a Pull Request.
 
 ## Links
 
