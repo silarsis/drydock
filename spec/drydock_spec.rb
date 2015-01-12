@@ -1,14 +1,14 @@
 require 'spec_helper'
-require 'loop_test'
+require 'drydock'
 
 # Tests for the main module
-module LoopTest
+module Drydock
   describe Config do
     context 'with basic configuration' do
       let(:config) { Config.new }
-      specify { expect(config.name).to eq 'loop_test-test' }
+      specify { expect(config.name).to eq 'drydock-test' }
       specify { expect(config.entrypoint).to be_nil }
-      specify { expect(config.image).to eq 'loop_test' }
+      specify { expect(config.image).to eq 'drydock' }
       specify { expect(config.command).to eq 'rspec spec' }
     end
     context 'with provide value for' do
@@ -36,7 +36,7 @@ module LoopTest
   end
 
   describe Monitor do
-    let(:config) { LoopTest::Config.new }
+    let(:config) { Drydock::Config.new }
     let(:monitor) { Monitor.new(config) }
 
     describe '#monitor' do

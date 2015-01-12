@@ -1,6 +1,6 @@
 FROM ruby:2.2.0
-ADD . /loop
-WORKDIR /loop
+ADD . /drydock
+WORKDIR /drydock
 RUN bundle install
 RUN bundle exec rspec spec
 RUN bundle exec rake build

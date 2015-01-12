@@ -13,8 +13,8 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'loop_test'
-  gem.homepage = 'http://github.com/silarsis/loop_test'
+  gem.name = 'drydock'
+  gem.homepage = 'http://github.com/silarsis/drydock'
   gem.license = 'MIT'
   gem.summary = 'Test something in a loop, in a docker container'
   gem.description = 'Run tests on change in a docker container continuously'
@@ -23,13 +23,6 @@ Jeweler::Tasks.new do |gem|
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
-
-require 'rake/testtask'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-end
 
 desc 'Code coverage detail'
 task :simplecov do
@@ -44,7 +37,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "loop_test #{version}"
+  rdoc.title = "drydock #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
@@ -52,6 +45,6 @@ end
 namespace :build do
   desc 'Build the Docker container'
   task :docker do
-    system('docker build -t loop_test .')
+    system('docker build -t silarsis/drydock .')
   end
 end

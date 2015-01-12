@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 
-require 'loop_test'
+require 'drydock'
 require 'optparse'
 
 # Command line parser to setup options
 # :name, :command, :image, :entrypoint, :path
-class LoopTestOptions
+class DrydockOptions
   def self.parse(args)
-    options = LoopTest::Config.default_config
+    options = Drydock::Config.default_config
 
     opt_parser = OptionParser.new do |opts|
-      opts.banner = 'Usage: loop_test [options]'
+      opts.banner = 'Usage: drydock [options]'
       opts.separator ''
       opts.separator 'Specific options:'
 
@@ -43,9 +43,9 @@ class LoopTestOptions
   end
 end
 
-options = LoopTestOptions.parse(ARGV)
-config = LoopTest::Config.new(options)
-monitor = LoopTest::Monitor.new(config)
+options = DrydockOptions.parse(ARGV)
+config = Drydock::Config.new(options)
+monitor = Drydock::Monitor.new(config)
 monitor.clean_containers
 monitor.listen
 sleep

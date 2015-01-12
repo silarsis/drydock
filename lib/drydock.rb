@@ -1,7 +1,7 @@
 require 'listen'
 require 'ptools'
 
-module LoopTest
+module Drydock
   # Configuration file reader
   class Config
     attr_reader :name, :command, :image, :entrypoint, :path
@@ -9,7 +9,7 @@ module LoopTest
     def self.default_config
       {
         name: nil,
-        image: 'loop_test',
+        image: 'silarsis/drydock',
         command: 'rspec spec',
         entrypoint: nil,
         path: `pwd`.strip
