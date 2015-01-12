@@ -6,3 +6,4 @@ RUN bundle exec rspec spec
 RUN bundle exec rake build
 RUN bundle exec rake install
 WORKDIR /app
+CMD drydock
