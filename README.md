@@ -1,20 +1,20 @@
-# drydock
+# drydocker
 
 A project to provide a simple continuous testing tool.
 
 ## Installation
 
-Drydock can be installed as a gem (`gem install drydock`), or as a docker
-image (`docker pull silarsis/drydock`)
+Drydocker can be installed as a gem (`gem install drydocker`), or as a docker
+image (`docker pull silarsis/drydocker`)
 
 ## Usage
 
-If installed as a gem, you will have a `drydock` executable. If installed as
-a docker image, your command to run drydock is `docker run -it silarsis/drydock`
+If installed as a gem, you will have a `drydocker` executable. If installed as
+a docker image, your command to run drydocker is `docker run -it silarsis/drydocker`
 
 In either case, running with `-h` will provide up-to-date usage instructions.
 
-## Contributing to drydock
+## Contributing to drydocker
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.

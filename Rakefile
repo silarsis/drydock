@@ -13,8 +13,8 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'drydock'
-  gem.homepage = 'http://github.com/silarsis/drydock'
+  gem.name = 'drydocker'
+  gem.homepage = 'http://github.com/silarsis/drydocker'
   gem.license = 'MIT'
   gem.summary = 'Test something in a loop, in a docker container'
   gem.description = 'Run tests on change in a docker container continuously'
@@ -37,7 +37,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ''
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "drydock #{version}"
+  rdoc.title = "drydocker #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
@@ -45,6 +45,6 @@ end
 namespace :build do
   desc 'Build the Docker container'
   task :docker do
-    system('docker build -t silarsis/drydock .')
+    system('docker build -t silarsis/drydocker .')
   end
 end
