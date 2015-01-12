@@ -11,6 +11,10 @@ rescue Bundler::BundlerError => e
 end
 require 'rake'
 
+def version
+  File.exist?('VERSION') ? File.read('VERSION').strip : ''
+end
+
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   gem.name = 'drydocker'
@@ -34,8 +38,6 @@ task default: :test
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ''
-
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "drydocker #{version}"
   rdoc.rdoc_files.include('README*')
@@ -45,6 +47,14 @@ end
 namespace :build do
   desc 'Build the Docker container'
   task :docker do
-    system('docker build -t silarsis/drydocker .')
+    system("docker build -t silarsis/drydocker:#{version} .")
+    system("docker tag -f silarsis/drydocker:#{version} silarsis/drydocker:latest")
+  end
+end
+
+namespace :release do
+  desc 'Release the Docker container'
+  task :docker do
+    system("docker push silarsis/drydocker:#{version}")
   end
 end

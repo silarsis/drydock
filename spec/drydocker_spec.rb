@@ -6,7 +6,7 @@ module Drydocker
   describe Config do
     context 'with basic configuration' do
       let(:config) { Config.new }
-      specify { expect(config.name).to eq 'silarsis/drydocker-test' }
+      specify { expect(config.name).to eq 'silarsis-drydocker-test' }
       specify { expect(config.entrypoint).to be_nil }
       specify { expect(config.image).to eq 'silarsis/drydocker' }
       specify { expect(config.command).to eq 'rspec spec' }

@@ -18,7 +18,7 @@ module Drydocker
 
     def initialize(params = {})
       config = Config.default_config.merge(params)
-      @name = config[:name] || "#{config[:image]}-test"
+      @name = config[:name] || "#{config[:image].sub('/', '-')}-test"
       @entrypoint = config[:entrypoint]
       @image = config[:image]
       @command = config[:command]

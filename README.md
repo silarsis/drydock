@@ -11,10 +11,16 @@ image (`docker pull silarsis/drydocker`)
 
 ## Usage
 
-If installed as a gem, you will have a `drydocker` executable. If installed as
-a docker image, your command to run drydocker is `docker run -it silarsis/drydocker`
+When installed as a gem, you will have a `drydocker` executable. Running with
+`-h` will provide up-to-date usage instructions.
 
-In either case, running with `-h` will provide up-to-date usage instructions.
+Basic usage is to run `drydocker` in the top level directory of the project
+you're working on - by default, it will mount that directory into an image
+that has enough for running rspec installed, and will run `rspec spec` every
+time it sees a change in the directory.
+
+You can specify particular images to run in and commands to run at command line
+if you need to run your tests in a different way or container.
 
 ## Contributing to drydocker
 
