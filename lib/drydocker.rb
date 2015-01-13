@@ -4,7 +4,7 @@ require 'ptools'
 module Drydocker
   # Configuration file reader
   class Config
-    attr_reader :name, :command, :image, :entrypoint, :path
+    attr_reader :name, :command, :image, :entrypoint, :path, :verbose
 
     def self.default_config
       {
@@ -12,7 +12,8 @@ module Drydocker
         image: 'silarsis/drydocker',
         command: 'rspec spec',
         entrypoint: nil,
-        path: `pwd`.strip
+        path: `pwd`.strip,
+        verbose: false
       }
     end
 
@@ -23,7 +24,7 @@ module Drydocker
       @entrypoint = config[:entrypoint]
       @command = config[:command]
       @path = config[:path]
-      @testing = config[:testing]
+      @verbose = config[:verbose]
     end
 
     private
@@ -47,11 +48,13 @@ module Drydocker
         run_or_start
       end
       listener.start # not blocking
+      puts 'now listening'
     end
 
     def clean_containers
       fail 'No docker found' if File.which('docker').nil?
-      return unless system("docker ps | grep #{config.name}")
+      return unless `docker ps | grep #{config.name}`
+      puts 'cleaning up previous containers' if config.verbose
       `docker kill #{config.name}`
       `docker rm #{config.name}`
     end
@@ -94,10 +97,12 @@ module Drydocker
     end
 
     def run
+      puts docker_run_cmd if config.verbose
       system(docker_run_cmd)
     end
 
     def start
+      puts docker_start_cmd if config.verbose
       system(docker_start_cmd)
     end
 

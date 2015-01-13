@@ -37,6 +37,10 @@ class DrydockerOptions
       opts.on('-p', '--path [PATH]') do |path|
         options[:path] = path
       end
+
+      opts.on('-v', '--[no-]verbose') do |verbose|
+        options[:verbose] = verbose
+      end
     end
     opt_parser.parse!(args)
     options
