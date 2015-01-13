@@ -36,7 +36,7 @@ the output of `drydocker -h` for more information on the flags to use.
 ## Links
 
 * Source code: https://github.com/silarsis/drydocker
-* Build/Test: https://app.wercker.com/status/b00d4339862ef12b880f0022b6d20b2a/s
+* Build/Test: https://app.wercker.com/#applications/54b446f6da3a4af764100e91
 * Docker container: https://registry.hub.docker.com/u/silarsis/drydocker/
 * RubyGem: https://rubygems.org/gems/drydocker
 
