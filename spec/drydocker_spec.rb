@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'drydocker'
+require 'shellwords'
 
 # Tests for the main module
 module Drydocker
@@ -9,7 +10,7 @@ module Drydocker
       specify { expect(config.name).to eq 'silarsis-drydocker-test' }
       specify { expect(config.entrypoint).to be_nil }
       specify { expect(config.image).to eq 'silarsis/drydocker' }
-      specify { expect(config.command).to eq 'rspec spec' }
+      specify { expect(config.command).to eq 'rspec spec'.shellescape }
     end
     context 'with provide value for' do
       context 'name' do
@@ -40,7 +41,7 @@ module Drydocker
   end
 
   describe Monitor do
-    let(:config) { Config.new }
+    let(:config) { Config.new(name: 'spec-container') }
     let(:monitor) { Monitor.new(config) }
 
     describe '#monitor' do
@@ -49,7 +50,7 @@ module Drydocker
           .with("docker ps -a | grep #{config.name} >/dev/null") \
           .and_return false
         expect(monitor).to receive(:system) \
-          .with("docker run -it --name #{config.name} -v #{config.path}:/app #{config.image} #{config.command}") \
+          .with("docker run -it -w /app --name #{config.name} -v #{config.path}:/app #{config.image} sh -c #{config.command}") \
           .and_return true
         monitor.send(:run_or_start)
       end

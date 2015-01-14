@@ -1,10 +1,12 @@
 require 'listen'
 require 'ptools'
+require 'logger'
+require 'shellwords'
 
 module Drydocker
   # Configuration file reader
   class Config
-    attr_reader :name, :command, :image, :entrypoint, :path, :verbose
+    attr_reader :name, :command, :image, :entrypoint, :path, :verbose, :logger
 
     def self.default_config
       {
@@ -22,9 +24,10 @@ module Drydocker
       @image = config[:image]
       @name = config[:name] || name_from_image
       @entrypoint = config[:entrypoint]
-      @command = config[:command]
+      @command = config[:command].shellescape
       @path = config[:path]
-      @verbose = config[:verbose]
+      @logger = Logger.new(STDERR)
+      @logger.level = Logger::DEBUG if config[:verbose]
     end
 
     private
@@ -44,17 +47,17 @@ module Drydocker
 
     def listen
       listener = Listen.to(config.path) do |modified, added, removed|
-        puts "triggering change: #{modified + added + removed}"
+        config.logger.info("triggering change: #{modified + added + removed}")
         run_or_start
       end
       listener.start # not blocking
-      puts 'now listening'
+      config.logger.info('now listening')
     end
 
     def clean_containers
       fail 'No docker found' if File.which('docker').nil?
-      return unless `docker ps | grep #{config.name}`
-      puts 'cleaning up previous containers' if config.verbose
+      return unless system(docker_check_cmd)
+      config.logger.debug('cleaning up previous containers')
       `docker kill #{config.name}`
       `docker rm #{config.name}`
     end
@@ -64,7 +67,7 @@ module Drydocker
     def docker_run_cmd
       %W(
         #{docker_cmd} #{name_opt} #{path_opt} #{entrypoint_opt} #{config.image}
-        #{command}
+        sh -c #{command}
       ).reject { |x| x == '' }.join(' ')
     end
 
@@ -77,7 +80,7 @@ module Drydocker
     end
 
     def docker_cmd
-      'docker run -it'
+      'docker run -it -w /app'
     end
 
     def name_opt
@@ -85,7 +88,7 @@ module Drydocker
     end
 
     def entrypoint_opt
-      config.entrypoint.nil? ? '' : "--entrypoint #{config.entrypoint}"
+      config.entrypoint.nil? ? '' : "--entrypoint #{config.entrypoint.shellescape}"
     end
 
     def path_opt
@@ -97,12 +100,12 @@ module Drydocker
     end
 
     def run
-      puts docker_run_cmd if config.verbose
+      config.logger.debug(docker_run_cmd)
       system(docker_run_cmd)
     end
 
     def start
-      puts docker_start_cmd if config.verbose
+      config.logger.debug(docker_start_cmd)
       system(docker_start_cmd)
     end
 
