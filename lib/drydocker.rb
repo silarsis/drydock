@@ -46,6 +46,7 @@ module Drydocker
     end
 
     def listen
+      run_or_start
       listener = Listen.to(config.path) do |modified, added, removed|
         config.logger.info("triggering change: #{modified + added + removed}")
         run_or_start
