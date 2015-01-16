@@ -50,7 +50,7 @@ module Drydocker
           .with("docker ps -a | grep #{config.name} >/dev/null") \
           .and_return false
         expect(monitor).to receive(:system) \
-          .with("docker run -it -w /app --name #{config.name} -v #{config.path}:/app #{config.image} sh -c #{config.command}") \
+          .with("docker run -it -w /app -e RUBYOPT -e SPEC_OPTS -e RSPEC_OPTS --name #{config.name} -v #{config.path}:/app #{config.image} sh -c #{config.command}") \
           .and_return true
         monitor.send(:run_or_start)
       end

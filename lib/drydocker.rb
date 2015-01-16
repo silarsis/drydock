@@ -67,9 +67,13 @@ module Drydocker
 
     def docker_run_cmd
       %W(
-        #{docker_cmd} #{name_opt} #{path_opt} #{entrypoint_opt} #{config.image}
+        #{docker_cmd} #{env_flags} #{name_opt} #{path_opt} #{entrypoint_opt} #{config.image}
         sh -c #{command}
       ).reject { |x| x == '' }.join(' ')
+    end
+
+    def env_flags
+      "-e RUBYOPT -e SPEC_OPTS -e RSPEC_OPTS"
     end
 
     def docker_start_cmd
