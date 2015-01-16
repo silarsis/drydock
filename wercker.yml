@@ -27,7 +27,7 @@ build:
         code: bundle exec rspec spec
   after-steps:
     - sherzberg/slack-notify:
-      subdomain: littlejohn
-      token: $SLACK_TOKEN
-      channel: deployment
-      username: wercker
+        subdomain: littlejohn
+        token: $SLACK_TOKEN
+        channel: deployment
+        username: wercker
