@@ -14,6 +14,7 @@ doc
 
 # jeweler generated
 pkg
+drydocker.gemspec
 
 # For bundling
 vendor
