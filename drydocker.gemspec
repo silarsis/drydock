@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Kevin Littlejohn"]
-  s.date = "2015-01-16"
+  s.date = "2015-01-23"
   s.description = "Run tests on change in a docker container continuously"
   s.email = "kevin@littlejohn.id.au"
   s.executables = ["drydocker"]
