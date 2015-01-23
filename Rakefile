@@ -73,7 +73,7 @@ namespace :release do
     end
     `git config --global user.email kevin@littlejohn.id.au` if `git config user.email`.empty?
     `git config --global user.name "Kevin Littlejohn (Wercker)"` if `git config user.name`.empty?
-    `git config --global push.default simple` if `git config push.default`.empty?
+    `git config --global push.default current` if `git config push.default`.empty?
     `git config --global github.user silarsis` if `git config github.user`.empty?
   end
   desc "Release the Docker container"
