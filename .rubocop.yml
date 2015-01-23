@@ -3,3 +3,5 @@ FileName:
     - bin/**
     - Gemfile
     - Rakefile
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
