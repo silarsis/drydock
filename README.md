@@ -1,6 +1,6 @@
 # drydocker
 
-[![wercker status](https://app.wercker.com/status/b00d4339862ef12b880f0022b6d20b2a/s "wercker status")](https://app.wercker.com/project/bykey/b00d4339862ef12b880f0022b6d20b2a)
+[![wercker status](https://app.wercker.com/status/b00d4339862ef12b880f0022b6d20b2a/m "wercker status")](https://app.wercker.com/project/bykey/b00d4339862ef12b880f0022b6d20b2a)
 
 Drydocker provides a simple wrapper to run tests inside a container every
 time you make a change to your code. It listens to filesystem changes on your
