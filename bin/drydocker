@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'drydocker'
-require 'optparse'
+require "drydocker"
+require "optparse"
 
 # Command line parser to setup options
 # :name, :command, :image, :entrypoint, :path
@@ -9,35 +9,40 @@ def parse(args)
   options = Drydocker::Config.default_config
 
   opt_parser = OptionParser.new do |opts|
-    opts.banner = 'Usage: drydocker [options]'
-    opts.separator ''
-    opts.separator 'Specific options:'
+    opts.banner = "Usage: drydocker [options]"
+    opts.separator ""
+    opts.separator "Specific options:"
 
-    opts.on('-f', '--filename [FILENAME]', 'File of options to load') do |fn|
+    opts.on("-f", "--filename [FILENAME]", "File of options to load") do |fn|
       options.load(fn)
     end
 
-    opts.on('-n', '--name [NAME]', 'Container name to run tests in, default "<imagename>-test"') do |name|
+    opts.on("-n", "--name [NAME]",
+            "Container name to run tests in, default \"<imagename>-test\"") do |name|
       options[:name] = name
     end
 
-    opts.on('-c', '--command [COMMAND]', "command to run, default '#{options[:command]}'") do |cmd|
+    opts.on("-c", "--command [COMMAND]",
+            "command to run, default '#{options[:command]}'") do |cmd|
       options[:command] = cmd
     end
 
-    opts.on('-i', '--image [IMAGE]', "image to run for testing, default '#{options[:image]}'") do |img|
+    opts.on("-i", "--image [IMAGE]",
+            "image to run for testing, default '#{options[:image]}'") do |img|
       options[:image] = img
     end
 
-    opts.on('-e', '--entrypoint [ENTRYPOINT]', 'entrypoint in case you need to override that, default nil') do |entry|
+    opts.on("-e", "--entrypoint [ENTRYPOINT]",
+            "entrypoint in case you need to override that, default nil") do |entry|
       options[:entrypoint] = entry
     end
 
-    opts.on('-p', '--path [PATH]', "directory to monitor and mount for testing, default '#{options[:path]}'") do |path|
+    opts.on("-p", "--path [PATH]",
+            "directory to monitor and mount for testing, default '#{options[:path]}'") do |path|
       options[:path] = path
     end
 
-    opts.on('-v', '--[no-]verbose', 'verbose output') do |verbose|
+    opts.on("-v", "--[no-]verbose", "verbose output") do |verbose|
       options[:verbose] = verbose
     end
   end
