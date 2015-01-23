@@ -43,6 +43,12 @@ the output of `drydocker -h` for more information on the flags to use.
 * Docker container: <https://registry.hub.docker.com/u/silarsis/drydocker/>
 * RubyGem:          <https://rubygems.org/gems/drydocker>
 
+## Releasing
+
+Checkout the code, make changes, run `rake version:bump:minor`
+(see <https://github.com/technicalpickles/jeweler#version-bumping> for options),
+`git push` - wercker will do the rest.
+
 ## Copyright
 
 Copyright (c) 2015 Kevin Littlejohn. See LICENSE.txt for
