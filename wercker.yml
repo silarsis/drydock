@@ -37,9 +37,10 @@ build:
 
 deploy:
   steps:
+    - wercker/add-ssh-key@1.0.1:
+        keyname: GITHUB
     - script:
         name: release
         code: |
           bundle exec rake release:create_credentials
           bundle exec rake release
-          bundle exec rake release:docker
