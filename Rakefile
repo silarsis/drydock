@@ -64,11 +64,13 @@ namespace :release do
     unless ENV["RUBYGEMS_API_KEY"].nil?
       credfile = File.expand_path("~/.gem/credentials")
       unless File.exist? credfile
+        umask = File.umask 0177
         File.write(credfile, <<-EOF.unindent
           ---
           :rubygems_api_key: #{ENV["RUBYGEMS_API_KEY"]}
           EOF
-       )
+        )
+        File.umask umask
       end
     end
     `git config --global user.email kevin@littlejohn.id.au` if `git config user.email`.empty?
