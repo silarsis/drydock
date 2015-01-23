@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/silarsis/drydocker"
   s.licenses = ["MIT"]
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.4.5"
   s.summary = "Test something in a loop, in a docker container"
 
   if s.respond_to? :specification_version then
