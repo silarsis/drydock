@@ -38,7 +38,7 @@ build:
 deploy:
   steps:
     - wercker/add-ssh-key@1.0.1:
-        keyname: GITHUB
+        keyname: GITHUB_KEY
     - script:
         name: release
         code: |
