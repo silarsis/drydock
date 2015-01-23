@@ -1,5 +1,11 @@
 # encoding: utf-8
 
+class String
+  def unindent 
+    gsub(/^#{scan(/^\s*/).min_by{|l|l.length}}/, "")
+  end
+end
+
 require 'rubygems'
 require 'bundler'
 begin
@@ -53,6 +59,19 @@ namespace :build do
 end
 
 namespace :release do
+  task :create_credentials do
+    unless ENV['RUBYGEMS_API_KEY'].nil?
+      credfile = File.expand_path("~/.gem/credentials")
+      unless File.exist? credfile
+        File.write(credfile,
+          <<-EOF.unindent
+            ---
+            :rubygems_api_key: #{ENV['RUBYGEMS_API_KEY']}
+          EOF
+        )
+      end
+    end
+  end
   desc 'Release the Docker container'
   task :docker do
     system("docker push silarsis/drydocker:#{version}")
