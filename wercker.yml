@@ -40,7 +40,7 @@ deploy:
     - wercker/add-ssh-key@1.0.1:
         keyname: GITHUB_KEY
     - script:
-        name: release
+        name: rubygems
         code: |
           bundle exec rake release:create_credentials
           bundle exec rake release
