@@ -37,6 +37,9 @@ build:
 
 deploy:
   steps:
-    - script: bundle exec rake release
-    - script: bundle exec rake release:create_credentials
-    - script: bundle exec rake release:docker
+    - script:
+        name: release
+        code: |
+          bundle exec rake release:create_credentials
+          bundle exec rake release
+          bundle exec rake release:docker
