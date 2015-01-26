@@ -11,6 +11,8 @@ GEM
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
+    codeclimate-test-reporter (0.4.6)
+      simplecov (>= 0.7.1, < 1.0.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
@@ -105,6 +107,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.0)
+  codeclimate-test-reporter
   fuubar (~> 2.0)
   jeweler (~> 2.0)
   listen (~> 2.8)
