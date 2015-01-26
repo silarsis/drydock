@@ -1,6 +1,8 @@
 # drydocker
 
 [![wercker status](https://app.wercker.com/status/b00d4339862ef12b880f0022b6d20b2a/m "wercker status")](https://app.wercker.com/project/bykey/b00d4339862ef12b880f0022b6d20b2a)
+[![Code Climate](https://codeclimate.com/github/silarsis/drydocker/badges/gpa.svg)](https://codeclimate.com/github/silarsis/drydocker)
+[![Test Coverage](https://codeclimate.com/github/silarsis/drydocker/badges/coverage.svg)](https://codeclimate.com/github/silarsis/drydocker)
 
 Drydocker provides a simple wrapper to run tests inside a container every
 time you make a change to your code. It listens to filesystem changes on your
