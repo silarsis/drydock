@@ -22,6 +22,10 @@ def parse(args)
       options[:name] = name
     end
 
+    opts.on("-C", "--clean", "clean old container before running") do |clean|
+      options[:clean] = clean
+    end
+
     opts.on("-c", "--command [COMMAND]",
             "command to run, default '#{options[:command]}'") do |cmd|
       options[:command] = cmd
@@ -42,8 +46,17 @@ def parse(args)
       options[:path] = path
     end
 
+    opts.on("-o", "--[no-]once", "run once and exit") do |once|
+      options[:once] = once
+    end
+
     opts.on("-v", "--[no-]verbose", "verbose output") do |verbose|
       options[:verbose] = verbose
+    end
+
+    opts.on("--version", "Show version") do
+      puts File.exist?("VERSION") ? File.read("VERSION").strip : ""
+      exit
     end
   end
   opt_parser.parse!(args)
@@ -53,6 +66,10 @@ end
 options = parse(ARGV)
 config = Drydocker::Config.new(options)
 monitor = Drydocker::Monitor.new(config)
-monitor.clean_containers
-monitor.listen
-sleep
+monitor.clean_containers if options[:clean]
+if options[:once]
+  monitor.run_or_start
+else
+  monitor.listen
+  sleep
+end
