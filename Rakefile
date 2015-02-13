@@ -28,6 +28,12 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+begin
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec)
+rescue LoadError
+end
+
 require "rake"
 require "drydocker/version"
 
