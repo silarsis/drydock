@@ -4,6 +4,7 @@ PACKAGE_NAME = "drydocker"
 
 require "rubygems"
 require "bundler"
+require "fileutils"
 
 # Monkey patch to add an "unindent" method for heredocs
 class String
@@ -29,7 +30,7 @@ rescue Bundler::BundlerError => e
 end
 
 begin
-  require 'rspec/core/rake_task'
+  require "rspec/core/rake_task"
   RSpec::Core::RakeTask.new(:spec)
 rescue LoadError
 end
@@ -51,7 +52,9 @@ task build: ["build:gem", "build:docker"]
 namespace :build do
   desc "Build the gem"
   task :gem do
-    system("mv $(gem build drydocker.gemspec | grep File | cut -d' ' -f4) pkg/")
+    FileUtils.mkdir_p("pkg/")
+    system("gem build drydocker.gemspec")
+    FileUtils.mv(Dir.glob("*.gem"), "pkg/")
   end
 
   desc "Build the Docker container"
