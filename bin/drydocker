@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 
-require "drydocker"
+require "drydocker/version"
+require "drydocker/config"
+require "drydocker/monitor"
 require "optparse"
 
 # Command line parser to setup options

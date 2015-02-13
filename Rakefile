@@ -29,7 +29,7 @@ rescue Bundler::BundlerError => e
 end
 
 require "rake"
-require "drydocker"
+require "drydocker/version"
 
 require "rdoc/task"
 Rake::RDocTask.new do |rdoc|

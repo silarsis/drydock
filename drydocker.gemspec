@@ -5,7 +5,7 @@
 # stub: drydocker 0.1.11 ruby lib
 
 $LOAD_PATH << File.expand_path("../lib", __FILE__)
-require "drydocker"
+require "drydocker/version"
 
 Gem::Specification.new do |gem|
   gem.name = "drydocker"
