@@ -55,7 +55,7 @@ def parse(args)
     end
 
     opts.on("--version", "Show version") do
-      puts File.exist?("VERSION") ? File.read("VERSION").strip : ""
+      puts Drydocker::VERSION
       exit
     end
   end

@@ -3,10 +3,13 @@ require "ptools"
 require "logger"
 require "shellwords"
 
+# Core code for drydocker
 module Drydocker
+  VERSION = "0.1.11"
   # Configuration file reader
   class Config
-    attr_reader :name, :command, :image, :entrypoint, :path, :verbose, :logger
+    attr_reader :name, :command, :image, :entrypoint, \
+                :path, :verbose, :logger
 
     def self.default_config
       {
