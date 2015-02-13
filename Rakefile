@@ -2,7 +2,6 @@
 
 PACKAGE_NAME = "drydocker"
 
-require "drydocker"
 require "rubygems"
 require "bundler"
 
@@ -30,6 +29,7 @@ rescue Bundler::BundlerError => e
 end
 
 require "rake"
+require "drydocker"
 
 require "rdoc/task"
 Rake::RDocTask.new do |rdoc|
