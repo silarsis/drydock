@@ -6,8 +6,8 @@ RUN apt-get -yq update && apt-get -yq upgrade
 RUN apt-get -yq install lxc-docker-1.4.1
 WORKDIR /drydocker
 RUN bundle install
-RUN bundle exec rspec spec
-RUN bundle exec rake build
-RUN bundle exec rake install
+#RUN bundle exec rspec spec
+RUN bundle exec rake build:gem
+RUN bundle exec gem install pkg/drydocker*.gem
 WORKDIR /app
 CMD drydocker
